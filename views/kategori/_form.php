@@ -4,12 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\Book $model */
+/** @var app\models\Kategori $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="book-form">
-
+<div class="kategori-form">
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -18,24 +17,12 @@ use yii\widgets\ActiveForm;
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Buku</h3>
+                <h3 class="card-title">Kategori</h3>
               </div>
               <div class="card-body">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'tahun_terbit')->textInput() ?>
-
-    <?= $form->field($model, 'id_penulis')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'id_penerbit')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'id_kategori')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'sinopsis')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'kategori')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 
@@ -43,8 +30,9 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                </div>
-            </div>
+    </div>
+
+     </div>
     <?php ActiveForm::end(); ?>
             </div>
         </div>
@@ -52,3 +40,4 @@ use yii\widgets\ActiveForm;
 </div>
 </section>
 </div>
+

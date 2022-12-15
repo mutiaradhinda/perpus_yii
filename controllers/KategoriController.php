@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Publisher;
-use app\models\PublisherSearch;
+use app\models\Kategori;
+use app\models\KategoriSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PublisherlController implements the CRUD actions for Publisher model.
+ * KategoriController implements the CRUD actions for Kategori model.
  */
-class PublisherlController extends Controller
+class KategoriController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class PublisherlController extends Controller
     }
 
     /**
-     * Lists all Publisher models.
+     * Lists all Kategori models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PublisherSearch();
+        $searchModel = new KategoriSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class PublisherlController extends Controller
     }
 
     /**
-     * Displays a single Publisher model.
+     * Displays a single Kategori model.
      * @param string $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class PublisherlController extends Controller
     }
 
     /**
-     * Creates a new Publisher model.
+     * Creates a new Kategori model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Publisher();
+        $model = new Kategori();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class PublisherlController extends Controller
     }
 
     /**
-     * Updates an existing Publisher model.
+     * Updates an existing Kategori model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class PublisherlController extends Controller
     }
 
     /**
-     * Deletes an existing Publisher model.
+     * Deletes an existing Kategori model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class PublisherlController extends Controller
     }
 
     /**
-     * Finds the Publisher model based on its primary key value.
+     * Finds the Kategori model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id ID
-     * @return Publisher the loaded model
+     * @return Kategori the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Publisher::findOne(['id' => $id])) !== null) {
+        if (($model = Kategori::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

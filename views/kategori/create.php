@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var app\models\Author $model */
+/** @var app\models\Kategori $model */
 
-$this->title = 'Create Author';
-$this->params['breadcrumbs'][] = ['label' => 'Authors', 'url' => ['index']];
+$this->title = 'Create Kategori';
+$this->params['breadcrumbs'][] = ['label' => 'Kategoris', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="author-create">
-
+<div class="kategori-create">
+    s
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
