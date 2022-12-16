@@ -1,53 +1,38 @@
 <?php
 
-/** @var yii\web\View $this */
+use app\components\Config;
+use app\components\Session;
+use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
+$this->title = 'Aplikasi SAKIP ' . Config::getNamaKabKota();
+
 ?>
-<div class="site-index">
-
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+<style>
+    body{
+        color: white;
+        background-color: rgba(134, 4, 4, 0.787);
+        background-image: url('images/background-home.jpg');
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<div class="container mb-5">
+    <div class="row my-5">
+        <div class="col-md-4">
+            <div style="text-align: center; margin-top: 140px">
+                <img src="<?= Config::getImgLogo() ?>" alt="" style="width: 250px;">
             </div>
         </div>
-
+        <div class="col-md-8">
+            <div style="margin-top: 100px; background-color: rgba(0, 0, 0, 0.8); padding: 50px">
+                <div style="font-size: 24px; margin-bottom: 20px; font-weight: bold">
+                    
+                </div>
+                <div style="text-align: justify">
+                   
+                </div>
+            </div>
+        </div>
     </div>
 </div>

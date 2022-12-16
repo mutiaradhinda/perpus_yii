@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -61,7 +62,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+       if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login']);
+        }
+
+        if(User::isPetugas()) {
+            return $this->redirect(['/dashboard/index-petugas']);
+        }
+
+        if(User::isAnggota()) {
+            return $this->redirect(['/dashboard/index-anggota']);
+        }
+
+        return $this->redirect(['/dashboard/index']);
     }
 
     /**
@@ -71,16 +84,19 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+
+        $this->layout = '/main-login';
+        
+        if (Yii::$app->user->isGuest == false) {
+            return $this->redirect(['/site/index']);
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['/site/index']);
         }
 
-        $model->password = '';
         return $this->render('login', [
             'model' => $model,
         ]);

@@ -2,52 +2,118 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
+
+
+
+/**
+ * This is the model class for table "user".
+ *
+ * @property integer $id
+ * @property integer $role
+ * @property string $kode_pegawai
+ * @property string $username
+ * @property string $password
+ * @property string $nama
+ * @property string $email
+ * @property string $auth_key
+ * @property string $access_token
+ *
+ * @property Pegawai $kodePegawai
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+    const ROLE_ADMIN = 1;
+    const ROLE_PETUGAS = 2;
+    const ROLE_ANGGOTA = 3;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
+    public $auth_key;
+    public $role;
+    public $access_token;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'user';
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['id_user_role','username', 'password'], 'required'],
+            [['id_user_role'], 'integer'],
+            [['auth_key', 'access_token'], 'string', 'max' => 255],
+            [['id_anggota','id_petugas','id_admin'], 'integer'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'id_user_role' => 'User Role',
+            //'kode_pegawai' => 'Kode Pegawai',
+            'username' => 'Username',
+            'password' => 'Password',
+            //'nama' => 'Nama',
+            //'email' => 'Email',
+            'auth_key' => 'Auth Key',
+            'access_token' => 'Access Token',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * @inheritdoc
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
+        return static::findOne(['access_token' => $token]);
+    }
 
-        return null;
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->auth_key === $authKey;
     }
 
     /**
@@ -58,47 +124,95 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
+        return static::findOne(['username' => $username]);
     }
 
     /**
      * Validates password
      *
      * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    public function getRole()
+    {
+        if ($this->role === self::ROLE_ADMIN) {
+            return 'Admin';
+        } elseif ($this->role === self::ROLE_PETUGAS) {
+            return 'Petugas';
+        } {
+            return 'Anggota';
+        }
+    }
+
+    public static function isAdmin()
+    {
+        if(@Yii::$app->user->identity->id_user_role == User::ROLE_ADMIN){
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public static function isPetugas()
+    {
+        if(@Yii::$app->user->identity->id_user_role == User::ROLE_PETUGAS){
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isAnggota()
+    {
+        if(@Yii::$app->user->identity->id_user_role == User::ROLE_ANGGOTA){
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getIdAnggota()
+    {
+        return @Yii::$app->user->identity->id_anggota;
+    }
+
+    public static function getRoleList()
+    {
+        return [
+            self::ROLE_ADMIN => 'Admin',
+            self::ROLE_ANGGOTA => 'Anggota',
+            self::ROLE_PETUGAS => 'Petugas',
+        ];
+    }
+
+    public static function getCount($params = [])
+    {
+        return static::where($params)->count();
+    }
+
+    public function getUserRole()
+    {
+        return $this->hasOne(UserRole::class,['id'=>'id_user_role']);
+    }
+
+    public function getAnggota()
+    {
+       return $this->hasOne(Anggota::class, ['id' => 'id_anggota']);
+    }
+
+    public function getPetugas()
+    {
+       return $this->hasOne(Petugas::class, ['id' => 'id_petugas']);
+    }
+
+    public function getAdmin()
+    {
+       return $this->hasOne(Admin::class, ['id' => 'id_admin']);
     }
 }

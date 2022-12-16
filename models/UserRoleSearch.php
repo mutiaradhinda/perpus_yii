@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Publisher;
+use app\models\UserRole;
 
 /**
- * PublisherSearch represents the model behind the search form of `app\models\Publisher`.
+ * UserRoleSearch represents the model behind the search form of `app\models\UserRole`.
  */
-class PublisherSearch extends Publisher
+class UserRoleSearch extends UserRole
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class PublisherSearch extends Publisher
     {
         return [
             [['id'], 'integer'],
-            [['nama', 'alamat', 'telepon', 'email', 'created_at', 'updated_at'], 'safe'],
+            [['nama'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class PublisherSearch extends Publisher
      */
     public function search($params)
     {
-        $query = Publisher::find();
+        $query = UserRole::find();
 
         // add conditions that should always apply here
 
@@ -59,14 +59,9 @@ class PublisherSearch extends Publisher
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'nama', $this->nama])
-            ->andFilterWhere(['like', 'alamat', $this->alamat])
-            ->andFilterWhere(['like', 'telepon', $this->telepon])
-            ->andFilterWhere(['like', 'email', $this->email]);
+        $query->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
     }
