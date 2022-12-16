@@ -9,7 +9,17 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="author-form">
-
+     <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Penulis</h3>
+              </div>
+              <div class="card-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
@@ -28,6 +38,12 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
+    </div>
     <?php ActiveForm::end(); ?>
-
+            </div>
+        </div>
+    </div>
 </div>
+</section>
+</div>
+

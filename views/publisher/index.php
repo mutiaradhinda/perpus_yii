@@ -14,8 +14,17 @@ $this->title = 'Publishers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="publisher-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-outline">
+              <div class="card-header">
+                <h2 class="card-title">Daftar Penerbit</h2>
+              </div>
+              <div class="card-body">
 
     <p>
         <?= Html::a('Create Publisher', ['create'], ['class' => 'btn btn-success']) ?>
@@ -30,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            
             'nama',
             'alamat',
             'telepon',
@@ -46,6 +55,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    </div>
     <?php Pjax::end(); ?>
 
 </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
