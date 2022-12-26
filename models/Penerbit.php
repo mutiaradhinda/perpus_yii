@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -15,7 +16,7 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  */
-class Publisher extends \yii\db\ActiveRecord
+class Penerbit extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -51,5 +52,17 @@ class Publisher extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getBooks()
+    {
+        return $this->hasMany(Book::class, ['id_penerbit' => 'id']);
+    }
+
+     public static function getAllPenerbit()
+    {
+        $penerbit = Penerbit::find()->all();
+        $penerbit = ArrayHelper::map($penerbit, 'id', 'nama');
+        return $penerbit;
     }
 }

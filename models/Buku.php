@@ -20,7 +20,7 @@ use Yii;
  *
  * @property Authors $penulis
  */
-class Book extends \yii\db\ActiveRecord
+class Buku extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class Book extends \yii\db\ActiveRecord
             [['sinopsis'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['nama', 'image'], 'string', 'max' => 255],
-            [['id_penulis'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::class, 'targetAttribute' => ['id_penulis' => 'id']],
+            [['id_penulis'], 'exist', 'skipOnError' => true, 'targetClass' => Penulis::class, 'targetAttribute' => ['id_penulis' => 'id']],
         ];
     }
 
@@ -54,9 +54,9 @@ class Book extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nama' => 'Nama',
             'tahun_terbit' => 'Tahun Terbit',
-            'id_penulis' => 'Id Penulis',
-            'id_penerbit' => 'Id Penerbit',
-            'id_kategori' => 'Id Kategori',
+            'id_penulis' => 'Penulis',
+            'id_penerbit' => 'Penerbit', 
+            'id_kategori' => 'Kategori',
             'sinopsis' => 'Sinopsis',
             'image' => 'Image',
             'created_at' => 'Created At',
@@ -71,6 +71,18 @@ class Book extends \yii\db\ActiveRecord
      */
     public function getPenulis()
     {
-        return $this->hasOne(Authors::class, ['id' => 'id_penulis']);
+        return $this->hasOne(Penulis::class, ['id' => 'id_penulis']);
     }
+
+    public function getPenerbit()
+    {
+        return $this->hasOne(Penerbit::class, ['id' => 'id_penerbit']);
+    }
+
+    public function getKategori()
+    {
+        return $this->hasOne(Kategori::class, ['id' => 'id_kategori']);
+    }
+
+   
 }

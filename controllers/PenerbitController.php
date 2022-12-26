@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Book;
-use app\models\BookSearch;
+use app\models\Penerbit;
+use app\models\PenerbitSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BookController implements the CRUD actions for Book model.
+ * PenerbitController implements the CRUD actions for Penerbit model.
  */
-class BookController extends Controller
+class PenerbitController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class BookController extends Controller
     }
 
     /**
-     * Lists all Book models.
+     * Lists all Penerbit models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new BookSearch();
+        $searchModel = new PenerbitSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class BookController extends Controller
     }
 
     /**
-     * Displays a single Book model.
+     * Displays a single Penerbit model.
      * @param string $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class BookController extends Controller
     }
 
     /**
-     * Creates a new Book model.
+     * Creates a new Penerbit model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Book();
+        $model = new Penerbit();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class BookController extends Controller
     }
 
     /**
-     * Updates an existing Book model.
+     * Updates an existing Penerbit model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class BookController extends Controller
     }
 
     /**
-     * Deletes an existing Book model.
+     * Deletes an existing Penerbit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class BookController extends Controller
     }
 
     /**
-     * Finds the Book model based on its primary key value.
+     * Finds the Penerbit model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id ID
-     * @return Book the loaded model
+     * @return Penerbit the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Book::findOne(['id' => $id])) !== null) {
+        if (($model = Penerbit::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

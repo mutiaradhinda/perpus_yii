@@ -12,7 +12,7 @@ use yii\widgets\LinkPager;
 
 ?>
 
-<div class="card card-primary">
+<div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">Rekap</h3>
     </div>
@@ -25,8 +25,7 @@ use yii\widgets\LinkPager;
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <p>Jumlah Buku</p>
-
-                        <h3><?= Yii::$app->formatter->asInteger(Buku::getCount()); ?></h3>
+                        <h3>5</h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-book"></i>
@@ -41,8 +40,7 @@ use yii\widgets\LinkPager;
                 <div class="small-box bg-purple">
                     <div class="inner">
                         <p>Jumlah Penerbit</p>
-
-                        <h3><?= Yii::$app->formatter->asInteger(Penerbit::getCount()); ?></h3>
+                        <h3>5</h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-building"></i>
@@ -56,8 +54,7 @@ use yii\widgets\LinkPager;
                 <div class="small-box bg-green">
                     <div class="inner">
                         <p>Jumlah Penulis</p>
-
-                        <h3><?= Yii::$app->formatter->asInteger(Penulis::getCount()); ?></h3>
+                        <h3>5</h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-pencil-alt"></i>
@@ -72,8 +69,7 @@ use yii\widgets\LinkPager;
                 <div class="small-box bg-red">
                     <div class="inner">
                         <p>Jumlah Kategori</p>
-
-                        <h3><?= Yii::$app->formatter->asInteger(Kategori::getCount()); ?></h3>
+                        <h3>5</h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-list"></i>

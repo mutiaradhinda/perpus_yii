@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @property Book[] $books
  */
-class Author extends \yii\db\ActiveRecord
+class Penulis extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -63,5 +63,11 @@ class Author extends \yii\db\ActiveRecord
     public function getBooks()
     {
         return $this->hasMany(Book::class, ['id_penulis' => 'id']);
+    }
+    public static function getAllPenulis()
+    {
+        $penulis = Penulis::find()->all();
+        $penulis = ArrayHelper::map($penulis, 'id', 'nama');
+        return $penulis;
     }
 }

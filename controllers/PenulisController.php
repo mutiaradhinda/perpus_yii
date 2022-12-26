@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Author;
-use app\models\AuthorSearch;
+use app\models\Penulis;
+use app\models\PenulisSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AuthorController implements the CRUD actions for Author model.
+ * PenulisController implements the CRUD actions for Penulis model.
  */
-class AuthorController extends Controller
+class PenulisController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class AuthorController extends Controller
     }
 
     /**
-     * Lists all Author models.
+     * Lists all Penulis models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new AuthorSearch();
+        $searchModel = new PenulisSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class AuthorController extends Controller
     }
 
     /**
-     * Displays a single Author model.
+     * Displays a single Penulis model.
      * @param string $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class AuthorController extends Controller
     }
 
     /**
-     * Creates a new Author model.
+     * Creates a new Penulis model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Author();
+        $model = new Penulis();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class AuthorController extends Controller
     }
 
     /**
-     * Updates an existing Author model.
+     * Updates an existing Penulis model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class AuthorController extends Controller
     }
 
     /**
-     * Deletes an existing Author model.
+     * Deletes an existing Penulis model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class AuthorController extends Controller
     }
 
     /**
-     * Finds the Author model based on its primary key value.
+     * Finds the Penulis model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id ID
-     * @return Author the loaded model
+     * @return Penulis the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Author::findOne(['id' => $id])) !== null) {
+        if (($model = Penulis::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

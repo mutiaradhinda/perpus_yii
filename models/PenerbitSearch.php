@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Author;
+use app\models\Penerbit;
 
 /**
- * AuthorSearch represents the model behind the search form of `app\models\Author`.
+ * PenerbitSearch represents the model behind the search form of `app\models\Penerbit`.
  */
-class AuthorSearch extends Author
+class PenerbitSearch extends Penerbit
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class AuthorSearch extends Author
      */
     public function search($params)
     {
-        $query = Author::find();
+        $query = Penerbit::find();
 
         // add conditions that should always apply here
 

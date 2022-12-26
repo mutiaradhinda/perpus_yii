@@ -1,20 +1,20 @@
 <?php
 
-use app\models\Publisher;
+use app\models\Penerbit;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /** @var yii\web\View $this */
-/** @var app\models\PublisherSearch $searchModel */
+/** @var app\models\PenerbitSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Publishers';
+$this->title = 'Penerbits';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="publisher-index">
-    <section class="content">
+<div class="penerbit-index">
+     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <div class="card-body">
 
     <p>
-        <?= Html::a('Create Publisher', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Penerbit', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -35,27 +35,41 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            [
+                'header' => 'Penerbit',
+                'attribute' => 'nama',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Alamat',
+                'attribute' => 'alamat',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Telepon',
+                'attribute' => 'telepon',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Email',
+                'attribute' => 'email',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
             
-            'nama',
-            'alamat',
-            'telepon',
-            'email:email',
-            //'created_at',
-            //'updated_at',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Publisher $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Penerbit $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],
     ]); ?>
 
-    </div>
+   </div>
     <?php Pjax::end(); ?>
 
 </div>

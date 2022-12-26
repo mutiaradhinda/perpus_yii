@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Publisher $model */
+/** @var app\models\Penerbit $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Publishers', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Penerbits', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="publisher-view">
+<div class="penerbit-view">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

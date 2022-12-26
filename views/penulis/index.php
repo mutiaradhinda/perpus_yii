@@ -1,21 +1,20 @@
 <?php
 
-use app\models\Book;
+use app\models\Penulis;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /** @var yii\web\View $this */
-/** @var app\models\BookSearch $searchModel */
+/** @var app\models\PenulisSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Books';
+$this->title = 'Penulis';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="book-index">
-
-<section class="content">
+<div class="penulis-index">
+     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
@@ -23,11 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- general form elements -->
             <div class="card card-outline">
               <div class="card-header">
-                <h2 class="card-title">Daftar Buku</h2>
+                <h2 class="card-title">Daftar Penulis</h2>
               </div>
               <div class="card-body">
+
     <p>
-        <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Penulis', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -39,23 +39,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'nama',
-            'tahun_terbit',
-            'id_penulis',
-            'id_penerbit',
-            'id_kategori',
-            //'sinopsis:ntext',
-            'image',
+            [
+                'header' => 'Nama Penulis',
+                'attribute' => 'nama',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Alamat',
+                'attribute' => 'alamat',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Telepon',
+                'attribute' => 'telepon',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Email',
+                'attribute' => 'email',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Book $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Penulis $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],
     ]); ?>
 
-    </div>
+   </div>
     <?php Pjax::end(); ?>
 
 </div>

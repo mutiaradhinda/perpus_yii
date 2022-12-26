@@ -2,16 +2,19 @@
 
 namespace app\controllers;
 
-use app\models\Publisher;
-use app\models\PublisherSearch;
+use app\models\Buku;
+use app\models\Penulis;
+use app\models\Penerbit;
+use app\models\Kategori;
+use app\models\BukuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PublisherlController implements the CRUD actions for Publisher model.
+ * BukuController implements the CRUD actions for Buku model.
  */
-class PublisherController extends Controller
+class BukuController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +35,13 @@ class PublisherController extends Controller
     }
 
     /**
-     * Lists all Publisher models.
+     * Lists all Buku models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PublisherSearch();
+        $searchModel = new BukuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +51,7 @@ class PublisherController extends Controller
     }
 
     /**
-     * Displays a single Publisher model.
+     * Displays a single Buku model.
      * @param string $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +64,16 @@ class PublisherController extends Controller
     }
 
     /**
-     * Creates a new Publisher model.
+     * Creates a new Buku model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Publisher();
+        $model = new Buku();
+        $namaPenulis = Penulis::getAllPenulis();
+        $namaPenerbit = Penerbit::getAllPenerbit();
+        $namaKategori = Kategori::getAllKategori();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -79,11 +85,14 @@ class PublisherController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'namaPenulis' => $namaPenulis,
+            'namaPenerbit' => $namaPenerbit,
+            'namaKategori' => $namaKategori,
         ]);
     }
 
     /**
-     * Updates an existing Publisher model.
+     * Updates an existing Buku model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id ID
      * @return string|\yii\web\Response
@@ -103,7 +112,7 @@ class PublisherController extends Controller
     }
 
     /**
-     * Deletes an existing Publisher model.
+     * Deletes an existing Buku model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id ID
      * @return \yii\web\Response
@@ -117,15 +126,15 @@ class PublisherController extends Controller
     }
 
     /**
-     * Finds the Publisher model based on its primary key value.
+     * Finds the Buku model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id ID
-     * @return Publisher the loaded model
+     * @return Buku the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Publisher::findOne(['id' => $id])) !== null) {
+        if (($model = Buku::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

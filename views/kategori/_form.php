@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
           <!-- left column -->
           <div class="col-md-12">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card-secondary">
               <div class="card-header">
                 <h3 class="card-title">Kategori</h3>
               </div>
@@ -24,12 +24,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kategori')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
     </div>
 
      </div>

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <div class="card-body">
 
     <p>
-        <?= Html::a('Create Kategori', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Kategori', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -39,7 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'kategori',
+            [
+                'header' => 'Kategori',
+                'attribute' => 'kategori',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
            
             [
                 'class' => ActionColumn::className(),

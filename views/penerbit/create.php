@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var app\models\Publisher $model */
+/** @var app\models\Penerbit $model */
 
-$this->title = 'Create Publisher';
-$this->params['breadcrumbs'][] = ['label' => 'Publishers', 'url' => ['index']];
+$this->title = 'Create Penerbit';
+$this->params['breadcrumbs'][] = ['label' => 'Penerbits', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="publisher-create">
+<div class="penerbit-create">
 
     <?= $this->render('_form', [
         'model' => $model,

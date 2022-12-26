@@ -7,13 +7,8 @@ $this->title = "Halaman Dashboard";
 
 ?>
 
-<?= $this->render('_card-rekap'); ?>
+<?= $this->render("_card-rekap"); ?>
 
 
-<div class="row">
-	<div class="col-sm-6">
-		<?= $this->render('_card-grafik'); ?>
-	</div>
-</div>
 
 

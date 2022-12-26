@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -45,5 +46,17 @@ class Kategori extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getBooks()
+    {
+        return $this->hasMany(Book::class, ['id_kategori' => 'id']);
+    }
+
+    public static function getAllKategori()
+    {
+        $kategori = Kategori::find()->all();
+        $kategori = ArrayHelper::map($kategori, 'id', 'kategori');
+        return $kategori;
     }
 }

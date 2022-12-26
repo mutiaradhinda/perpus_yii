@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Book $model */
+/** @var app\models\Penulis $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Penulis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="book-view">
+<div class="penulis-view">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,12 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nama',
-            'tahun_terbit',
-            'id_penulis',
-            'id_penerbit',
-            'id_kategori',
-            'sinopsis:ntext',
-            'image',
+            'alamat',
+            'telepon',
+            'email:email',
             'created_at',
             'updated_at',
         ],

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\PublisherSearch $model */
+/** @var app\models\PenulisSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="publisher-search">
+<div class="penulis-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

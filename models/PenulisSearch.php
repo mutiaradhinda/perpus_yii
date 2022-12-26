@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Book;
+use app\models\Penulis;
 
 /**
- * BookSearch represents the model behind the search form of `app\models\Book`.
+ * PenulisSearch represents the model behind the search form of `app\models\Penulis`.
  */
-class BookSearch extends Book
+class PenulisSearch extends Penulis
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class BookSearch extends Book
     public function rules()
     {
         return [
-            [['id', 'tahun_terbit', 'id_penulis', 'id_penerbit', 'id_kategori'], 'integer'],
-            [['nama', 'sinopsis', 'image', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['nama', 'alamat', 'telepon', 'email', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class BookSearch extends Book
      */
     public function search($params)
     {
-        $query = Book::find();
+        $query = Penulis::find();
 
         // add conditions that should always apply here
 
@@ -59,17 +59,14 @@ class BookSearch extends Book
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'tahun_terbit' => $this->tahun_terbit,
-            'id_penulis' => $this->id_penulis,
-            'id_penerbit' => $this->id_penerbit,
-            'id_kategori' => $this->id_kategori,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'nama', $this->nama])
-            ->andFilterWhere(['like', 'sinopsis', $this->sinopsis])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'alamat', $this->alamat])
+            ->andFilterWhere(['like', 'telepon', $this->telepon])
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }
