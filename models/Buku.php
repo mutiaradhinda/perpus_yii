@@ -27,7 +27,7 @@ class Buku extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'book';
+        return 'buku';
     }
 
     /**
@@ -82,6 +82,11 @@ class Buku extends \yii\db\ActiveRecord
     public function getKategori()
     {
         return $this->hasOne(Kategori::class, ['id' => 'id_kategori']);
+    }
+
+    public static function getCount()
+    {
+        return static::find()->count();
     }
 
    

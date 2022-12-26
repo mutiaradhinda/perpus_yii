@@ -23,7 +23,7 @@ class Penerbit extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'publishers';
+        return 'penerbit';
     }
 
     /**
