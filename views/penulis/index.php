@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Penulis;
+use app\models\Buku;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -28,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Penulis', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Export PDF', ['report'], ['class' => 'btn btn-danger', 'target' => '_blank']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -57,6 +59,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'header' => 'Email',
                 'attribute' => 'email',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+
+            [
+                'header' => 'Jumlah Buku',
+                // 'class' => Buku::getJumlahBuku(),
                 'headerOptions' => ['class'=>'text-center'],
             ],
             

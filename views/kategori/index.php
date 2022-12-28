@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /** @var app\models\KategoriSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Kategoris';
+$this->title = 'Kategori';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kategori-index">
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Kategori', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Export PDF', ['report'], ['class' => 'btn btn-danger', 'target' => '_blank']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

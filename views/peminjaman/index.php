@@ -1,19 +1,19 @@
 <?php
 
-use app\models\Penerbit;
+use app\models\Peminjaman;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /** @var yii\web\View $this */
-/** @var app\models\PenerbitSearch $searchModel */
+/** @var app\models\PeminjamanSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Penerbit';
+$this->title = 'Peminjaman';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="penerbit-index">
+<div class="peminjaman-index">
      <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -22,13 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- general form elements -->
             <div class="card card-outline">
               <div class="card-header">
-                <h2 class="card-title">Daftar Penerbit</h2>
+                <h2 class="card-title">Daftar Buku</h2>
               </div>
               <div class="card-body">
 
     <p>
-        <?= Html::a('Create Penerbit', ['create'], ['class' => 'btn btn-secondary']) ?>
-        <?= Html::a('Export PDF', ['report'], ['class' => 'btn btn-danger', 'target' => '_blank']) ?>
+        <?= Html::a('Create Peminjaman', ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -41,36 +40,45 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'header' => 'Penerbit',
-                'attribute' => 'nama',
+                'header' => 'Judul Buku',
+                'attribute' => 'buku.nama',
                 'headerOptions' => ['class'=>'text-center'],
             ],
             [
-                'header' => 'Alamat',
-                'attribute' => 'alamat',
+                'header' => 'Anggota',
+                'attribute' => 'anggota',
                 'headerOptions' => ['class'=>'text-center'],
             ],
             [
-                'header' => 'Telepon',
-                'attribute' => 'telepon',
+                'header' => 'Tanggal Pinjam',
+                'attribute' => 'tanggal_pinjam',
                 'headerOptions' => ['class'=>'text-center'],
             ],
             [
-                'header' => 'Email',
-                'attribute' => 'email',
+                'header' => 'Tanggal Kembali',
+                'attribute' => 'tanggal_kembali',
                 'headerOptions' => ['class'=>'text-center'],
             ],
-            
+            [
+                'header' => 'Denda',
+                'attribute' => 'denda',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'header' => 'Status',
+                'attribute' => 'status',
+                'headerOptions' => ['class'=>'text-center'],
+            ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Penerbit $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Peminjaman $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],
     ]); ?>
 
-   </div>
+    </div>
     <?php Pjax::end(); ?>
 
 </div>
@@ -79,4 +87,3 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </section>
 </div>
-

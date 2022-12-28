@@ -52,8 +52,6 @@ use kartik\select2\Select2;
       ],
     ]); ?>
 
-    <?= $form->field($model, 'id_kategori')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'sinopsis')->textarea(['rows' => 6]) ?>
 
      <?= $form->field($model, 'image')->fileInput() ?>

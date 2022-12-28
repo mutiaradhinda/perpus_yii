@@ -1,5 +1,6 @@
 <html>
 	<body>
-		Test PDF
+		<table class='table table-bordered'>
+		</table>
 	</body>
 </html>

@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /** @var app\models\BukuSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Bukus';
+$this->title = 'Buku';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="buku-index">

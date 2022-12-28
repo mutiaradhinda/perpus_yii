@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -87,6 +88,13 @@ class Buku extends \yii\db\ActiveRecord
     public static function getCount()
     {
         return static::find()->count();
+    }
+
+     public static function getAllBuku()
+    {
+        $buku = Buku::find()->all();
+        $buku = ArrayHelper::map($buku, 'id', 'nama');
+        return $buku;
     }
    
 }

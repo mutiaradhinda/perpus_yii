@@ -75,4 +75,9 @@ class Penulis extends \yii\db\ActiveRecord
     {
         return static::find()->count();
     }
+
+    public static function getJumlahBuku()
+    {
+       return $this->where(Buku::class, ['id_penulis' => 'id'])->find()->count();
+    }
 }

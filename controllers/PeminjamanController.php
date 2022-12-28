@@ -2,17 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Penulis;
-use app\models\PenulisSearch;
+use app\models\Peminjaman;
+use app\models\Buku;
+use app\models\PeminjamanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use kartik\mpdf\Pdf;
 
 /**
- * PenulisController implements the CRUD actions for Penulis model.
+ * PeminjamanController implements the CRUD actions for Peminjaman model.
  */
-class PenulisController extends Controller
+class PeminjamanController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +33,13 @@ class PenulisController extends Controller
     }
 
     /**
-     * Lists all Penulis models.
+     * Lists all Peminjaman models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PenulisSearch();
+        $searchModel = new PeminjamanSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +49,7 @@ class PenulisController extends Controller
     }
 
     /**
-     * Displays a single Penulis model.
+     * Displays a single Peminjaman model.
      * @param string $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,13 +62,14 @@ class PenulisController extends Controller
     }
 
     /**
-     * Creates a new Penulis model.
+     * Creates a new Peminjaman model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Penulis();
+        $model = new Peminjaman();
+        $namabuku = Buku::getAllBuku();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -80,11 +81,12 @@ class PenulisController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'namaBuku' => $namabuku,
         ]);
     }
 
     /**
-     * Updates an existing Penulis model.
+     * Updates an existing Peminjaman model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id ID
      * @return string|\yii\web\Response
@@ -93,6 +95,7 @@ class PenulisController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $namabuku = Buku::getAllBuku();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -100,11 +103,12 @@ class PenulisController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'namaBuku' => $namabuku,
         ]);
     }
 
     /**
-     * Deletes an existing Penulis model.
+     * Deletes an existing Peminjaman model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id ID
      * @return \yii\web\Response
@@ -118,52 +122,18 @@ class PenulisController extends Controller
     }
 
     /**
-     * Finds the Penulis model based on its primary key value.
+     * Finds the Peminjaman model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id ID
-     * @return Penulis the loaded model
+     * @return Peminjaman the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Penulis::findOne(['id' => $id])) !== null) {
+        if (($model = Peminjaman::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-     public function actionReport() {
-    // get your HTML raw content without any layouts or scripts
-    $content = $this->renderPartial('_reportView');
-    
-    // setup kartik\mpdf\Pdf component
-    $pdf = new Pdf([
-        // set to use core fonts only
-        'mode' => Pdf::MODE_CORE, 
-        // A4 paper format
-        'format' => Pdf::FORMAT_A4, 
-        // portrait orientation
-        'orientation' => Pdf::ORIENT_PORTRAIT, 
-        // stream to browser inline
-        'destination' => Pdf::DEST_BROWSER, 
-        // your html content input
-        'content' => $content,  
-        // format content from your own css file if needed or use the
-        // enhanced bootstrap css built by Krajee for mPDF formatting 
-        'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
-        // any css to be embedded if required
-        'cssInline' => '.kv-heading-1{font-size:18px}', 
-         // set mPDF properties on the fly
-        'options' => ['title' => 'Krajee Report Title'],
-         // call mPDF methods on the fly
-        'methods' => [ 
-            'SetHeader'=>['Perpustakaan'], 
-            'SetFooter'=>['{PAGENO}'],
-        ]
-    ]);
-    
-    // return the pdf output as per the destination setting
-    return $pdf->render(); 
-}
 }

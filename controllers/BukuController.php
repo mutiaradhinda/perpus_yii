@@ -102,6 +102,10 @@ class BukuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $namaPenulis = Penulis::getAllPenulis();
+        $namaPenerbit = Penerbit::getAllPenerbit();
+        $namaKategori = Kategori::getAllKategori();
+
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -109,6 +113,9 @@ class BukuController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'namaPenulis' => $namaPenulis,
+            'namaPenerbit' => $namaPenerbit,
+            'namaKategori' => $namaKategori,
         ]);
     }
 
