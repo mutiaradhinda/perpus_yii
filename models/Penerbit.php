@@ -54,9 +54,9 @@ class Penerbit extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getBooks()
+    public function getPenerbitCount()
     {
-        return $this->hasMany(Book::class, ['id_penerbit' => 'id']);
+        return $this->hasMany(Buku::className(), ['id_penerbit' => 'id'])->count();
     }
 
      public static function getAllPenerbit()
