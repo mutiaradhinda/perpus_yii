@@ -24,7 +24,7 @@ class Penulis extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'authors';
+        return 'penulis';
     }
 
     /**
@@ -69,5 +69,10 @@ class Penulis extends \yii\db\ActiveRecord
         $penulis = Penulis::find()->all();
         $penulis = ArrayHelper::map($penulis, 'id', 'nama');
         return $penulis;
+    }
+
+    public static function getCount()
+    {
+        return static::find()->count();
     }
 }

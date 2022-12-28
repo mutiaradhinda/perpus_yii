@@ -65,4 +65,9 @@ class Penerbit extends \yii\db\ActiveRecord
         $penerbit = ArrayHelper::map($penerbit, 'id', 'nama');
         return $penerbit;
     }
+
+    public static function getCount()
+    {
+        return static::find()->count();
+    }
 }

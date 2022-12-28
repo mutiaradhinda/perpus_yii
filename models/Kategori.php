@@ -59,4 +59,11 @@ class Kategori extends \yii\db\ActiveRecord
         $kategori = ArrayHelper::map($kategori, 'id', 'kategori');
         return $kategori;
     }
+
+    public static function getCount()
+    {
+        return static::find()->count();
+    }
+
+    
 }

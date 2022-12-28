@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\mpdf\Pdf;
 
 $params = require __DIR__ . '/params.php';
 if (file_exists(__DIR__ . '/params_local.php')) {
@@ -58,6 +59,12 @@ $config = [
                    '@app/views' => '@app/themes/adminlte3/views'
                 ],
             ],
+        ],
+    'pdf' => [
+        'class' => Pdf::classname(),
+        'format' => Pdf::FORMAT_A4,
+        'orientation' => Pdf::ORIENT_PORTRAIT,
+        'destination' => Pdf::DEST_BROWSER,
         ],
         'reCaptcha' => [
             'name' => 'reCaptcha',

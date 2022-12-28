@@ -88,6 +88,5 @@ class Buku extends \yii\db\ActiveRecord
     {
         return static::find()->count();
     }
-
    
 }
