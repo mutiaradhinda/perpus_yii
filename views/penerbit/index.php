@@ -61,7 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'email',
                 'headerOptions' => ['class'=>'text-center'],
             ],
-
             [
                 'class' =>'yii\grid\DataColumn',
                 'attribute' => 'Jumlah Buku',

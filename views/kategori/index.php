@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Kategori;
+use app\models\Buku;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -44,6 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Kategori',
                 'attribute' => 'kategori',
                 'headerOptions' => ['class'=>'text-center'],
+            ],
+            [
+                'class' =>'yii\grid\DataColumn',
+                'attribute' => 'Jumlah Buku',
+                'value' =>'KategoriCount',
             ],
            
             [

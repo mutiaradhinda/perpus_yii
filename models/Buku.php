@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\helpers\ArrayHelper;
+use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
@@ -26,6 +27,13 @@ class Buku extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     public static function tableName()
     {
         return 'buku';
@@ -41,7 +49,8 @@ class Buku extends \yii\db\ActiveRecord
             [['tahun_terbit', 'id_penulis', 'id_penerbit', 'id_kategori'], 'integer'],
             [['sinopsis'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['nama', 'image'], 'string', 'max' => 255],
+            [['nama'], 'string', 'max' => 255],
+            [['image'],'file','skipOnEmpty'=>TRUE,'extensions'=>'jpg, png'],
             [['id_penulis'], 'exist', 'skipOnError' => true, 'targetClass' => Penulis::class, 'targetAttribute' => ['id_penulis' => 'id']],
         ];
     }

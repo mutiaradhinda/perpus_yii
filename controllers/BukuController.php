@@ -11,6 +11,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
+use PhpOffice\PhpSpreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use yii\web\UploadedFile;
 
 /**
  * BukuController implements the CRUD actions for Buku model.
@@ -71,26 +74,36 @@ class BukuController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Buku();
         $namaPenulis = Penulis::getAllPenulis();
         $namaPenerbit = Penerbit::getAllPenerbit();
         $namaKategori = Kategori::getAllKategori();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            $model->image = yiiwebUploadedFile::getInstance($model, 'image');
 
-        return $this->render('create', [
-            'model' => $model,
-            'namaPenulis' => $namaPenulis,
-            'namaPenerbit' => $namaPenerbit,
-            'namaKategori' => $namaKategori,
-        ]);
+            if ($model->validate()) {
+                $saveTo = 'uploads/' . $model->image->baseName . '.' . $model->image->extension;
+                if ($model->image->saveAs($saveTo)) {
+                    $model->save(false);
+                    Yii::$app->session->setFlash('success', 'Sampul berhasil disimpan');
+                } else {
+                    Yii::$app->session->setFlash('error', 'Data gagal disimpan');
+                }
+            }
+            return $this->refresh();
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'namaPenulis' => $namaPenulis,
+                'namaPenerbit' => $namaPenerbit,        
+                'namaKategori' => $namaKategori,
+            ]);
+        }
     }
+
 
     /**
      * Updates an existing Buku model.
@@ -100,23 +113,35 @@ class BukuController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
+
     {
-        $model = $this->findModel($id);
+        $model = Buku::findOne($id);
         $namaPenulis = Penulis::getAllPenulis();
         $namaPenerbit = Penerbit::getAllPenerbit();
         $namaKategori = Kategori::getAllKategori();
 
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            $model->image = yiiwebUploadedFile::getInstance($model, 'image');
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->validate()) {
+                $saveTo = 'uploads/' . $model->image->baseName . '.' . $model->image->extension;
+                if ($model->image->saveAs($saveTo)) {
+                    $model->save(false);
+                    Yii::$app->session->setFlash('success', 'image berhasil disimpan');
+                } else {
+                    Yii::$app->session->setFlash('error', 'Data gagal disimpan');
+                }
+            }
+            return $this->refresh();
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+                'namaPenulis' => $namaPenulis,
+                'namaPenerbit' => $namaPenerbit,
+                'namaKategori' => $namaKategori,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-            'namaPenulis' => $namaPenulis,
-            'namaPenerbit' => $namaPenerbit,
-            'namaKategori' => $namaKategori,
-        ]);
     }
 
     /**
@@ -127,9 +152,14 @@ class BukuController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
+     {
+        $model = Buku::findOne($id);
+        $filepath=Yii::getAlias('@app') . '/uploads/' . $model->image;
+        if (is_file($filepath))
+        {
+           unlink($filepath);
+        }
+        $model->delete();
         return $this->redirect(['index']);
     }
 
@@ -182,4 +212,40 @@ public function actionReport() {
     // return the pdf output as per the destination setting
     return $pdf->render(); 
 }
+ 
+public function actionExcel()
+ 
+{
+ 
+$spreadsheet = new PhpSpreadsheet\Spreadsheet();
+$worksheet = $spreadsheet->getActiveSheet();
+ 
+//Menggunakan Model
+ 
+$database =\common\models\RefJafung::find()
+->select('kode_jafung,jenis_jafung')
+->all();
+ 
+//JIka menggunakan DAO , gunakan QueryAll()
+ 
+/*
+ 
+$sql = "select kode_jafung,jenis_jafung from ref_jafung"
+ 
+$database = Yii::$app->db->createCommand($sql)->queryAll();
+ 
+*/
+ 
+$database = \yii\helpers\ArrayHelper::toArray($database);
+$worksheet->fromArray($database, null, 'A4');
+ 
+$writer = new Xlsx($spreadsheet);
+ 
+header('Content-Type: application/vnd.ms-excel');
+header('Content-Disposition: attachment;filename="download.xlsx"');
+header('Cache-Control: max-age=0');
+$writer->save('php://output');
+ 
+}
+
 }

@@ -22,7 +22,7 @@ use kartik\select2\Select2;
               </div>
               <div class="card-body">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
 
@@ -54,11 +54,7 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'sinopsis')->textarea(['rows' => 6]) ?>
 
-     <?= $form->field($model, 'image')->fileInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-secondary']) ?>
-    </div>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
    </div>
     <?php ActiveForm::end(); ?>

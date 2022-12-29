@@ -59,7 +59,7 @@ class Penerbit extends \yii\db\ActiveRecord
         return $this->hasMany(Buku::className(), ['id_penerbit' => 'id'])->count();
     }
 
-     public static function getAllPenerbit()
+    public static function getAllPenerbit()
     {
         $penerbit = Penerbit::find()->all();
         $penerbit = ArrayHelper::map($penerbit, 'id', 'nama');

@@ -61,11 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'email',
                 'headerOptions' => ['class'=>'text-center'],
             ],
-
             [
-                'header' => 'Jumlah Buku',
-                // 'class' => Buku::getJumlahBuku(),
-                'headerOptions' => ['class'=>'text-center'],
+                'class' =>'yii\grid\DataColumn',
+                'attribute' => 'Jumlah Buku',
+                'value' =>'PenulisCount',
             ],
             
             [

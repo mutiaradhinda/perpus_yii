@@ -48,9 +48,9 @@ class Kategori extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getBooks()
+   public function getKategoriCount()
     {
-        return $this->hasMany(Book::class, ['id_kategori' => 'id']);
+        return $this->hasMany(Buku::className(), ['id_kategori' => 'id'])->count();
     }
 
     public static function getAllKategori()

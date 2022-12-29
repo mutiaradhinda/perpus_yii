@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Buku', ['create'], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Export PDF', ['report'], ['class' => 'btn btn-danger', 'target' => '_blank']) ?>
+        <?= Html::a('Export Excel', ['excel'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -66,9 +67,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class'=>'text-center'],
             ],
             [
+                'class' => 'yii\grid\DataColumn',
                 'header' => 'Sampul',
-                'attribute' => 'image',
-                'headerOptions' => ['class'=>'text-center'],
+                'format' => 'raw',
+                'value' => function($data){
+                    return "<img width='104px' src='".Url::to(['blog/view-image','nama'=>$data->image])."'>";
+                }
             ],
            
             [

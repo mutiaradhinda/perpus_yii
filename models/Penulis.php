@@ -60,9 +60,9 @@ class Penulis extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBooks()
+    public function getPenulisCount()
     {
-        return $this->hasMany(Book::class, ['id_penulis' => 'id']);
+        return $this->hasMany(Buku::className(), ['id_penulis' => 'id'])->count();
     }
     public static function getAllPenulis()
     {
