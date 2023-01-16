@@ -80,17 +80,17 @@ class BukuController extends Controller
         $namaPenerbit = Penerbit::getAllPenerbit();
         $namaKategori = Kategori::getAllKategori();
 
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
+        if (Buku::$app->request->post()) {
+            $model->load(Buku::$app->request->post());
             $model->image = yiiwebUploadedFile::getInstance($model, 'image');
 
             if ($model->validate()) {
                 $saveTo = 'uploads/' . $model->image->baseName . '.' . $model->image->extension;
                 if ($model->image->saveAs($saveTo)) {
                     $model->save(false);
-                    Yii::$app->session->setFlash('success', 'Sampul berhasil disimpan');
+                    Buku::$app->session->setFlash('success', 'Sampul berhasil disimpan');
                 } else {
-                    Yii::$app->session->setFlash('error', 'Data gagal disimpan');
+                    Buku::$app->session->setFlash('error', 'Data gagal disimpan');
                 }
             }
             return $this->refresh();
@@ -120,17 +120,17 @@ class BukuController extends Controller
         $namaPenerbit = Penerbit::getAllPenerbit();
         $namaKategori = Kategori::getAllKategori();
 
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
+        if (Buku::$app->request->post()) {
+            $model->load(Buku::$app->request->post());
             $model->image = yiiwebUploadedFile::getInstance($model, 'image');
 
             if ($model->validate()) {
                 $saveTo = 'uploads/' . $model->image->baseName . '.' . $model->image->extension;
                 if ($model->image->saveAs($saveTo)) {
                     $model->save(false);
-                    Yii::$app->session->setFlash('success', 'image berhasil disimpan');
+                    Buku::$app->session->setFlash('success', 'image berhasil disimpan');
                 } else {
-                    Yii::$app->session->setFlash('error', 'Data gagal disimpan');
+                    Buku::$app->session->setFlash('error', 'Data gagal disimpan');
                 }
             }
             return $this->refresh();
@@ -213,39 +213,21 @@ public function actionReport() {
     return $pdf->render(); 
 }
  
-public function actionExcel()
- 
-{
- 
-$spreadsheet = new PhpSpreadsheet\Spreadsheet();
-$worksheet = $spreadsheet->getActiveSheet();
- 
-//Menggunakan Model
- 
-$database =\common\models\RefJafung::find()
-->select('kode_jafung,jenis_jafung')
-->all();
- 
-//JIka menggunakan DAO , gunakan QueryAll()
- 
-/*
- 
-$sql = "select kode_jafung,jenis_jafung from ref_jafung"
- 
-$database = Yii::$app->db->createCommand($sql)->queryAll();
- 
-*/
- 
-$database = \yii\helpers\ArrayHelper::toArray($database);
-$worksheet->fromArray($database, null, 'A4');
- 
-$writer = new Xlsx($spreadsheet);
- 
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="download.xlsx"');
-header('Cache-Control: max-age=0');
-$writer->save('php://output');
- 
-}
+
+    public function actionExcel()
+    {
+        $searchModel  = new categorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->renderPartial('excel', ['searchModel' => $searchModel,'dataProvider' => $dataProvider]);
+    }
+
+    public function actionIndex()
+    {
+        $searchModel  = new categorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', ['searchModel' => $searchModel,'dataProvider' => $dataProvider]);
+    }
 
 }

@@ -19,13 +19,13 @@ use app\models\Buku;
         <tbody>
 			<?php $no=1; foreach(Buku::find()->all() as $buku): ?>
 		<tr>
-			<td>{{ $no}}</td>
-            <td>{{ $buku->nama }}</td>
-            <td>{{ $buku->tahun_terbit }}</td>
-            <td>{{ $buku->penulis->nama }}</td>
-            <td>{{ $buku->penerbit->nama }}</td>
-            <td>{{ $buku->kategori->kategori }}</td>
-            <td>{{ $buku->sinopsis }}</td>
+			<td><?= $no ?></td>
+            <td><?= $buku->nama ?></td>
+            <td><?= $buku->tahun_terbit ?></td>
+            <td><?= $buku->penulis->nama ?></td>
+            <td><?= $buku->penerbit->nama ?></td>
+            <td><?= $buku->kategori->kategori ?></td>
+            <td><?= $buku->sinopsis ?></td>
             <td><img src="./image/{{ $buku->image }}" width="150px"></td>
 		</tr>
 		<?php $no++; endforeach ?>
