@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Penulis', ['create'], ['class' => 'btn btn-secondary']) ?>
         <?= Html::a('Export PDF', ['report'], ['class' => 'btn btn-danger', 'target' => '_blank']) ?>
+        <?= Html::a('<i class="fa fa-file-excel"></i> Export Excel', ['exportexcel'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

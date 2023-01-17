@@ -8,6 +8,10 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
  * PenerbitController implements the CRUD actions for Penerbit model.
@@ -166,4 +170,56 @@ class PenerbitController extends Controller
     // return the pdf output as per the destination setting
     return $pdf->render(); 
 }
+
+ public function actionExportexcel()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->getColumnDimension('A')->setWidth(10); // mengatur lebar kolom
+        $sheet->getColumnDimension('B')->setWidth(30);
+        $sheet->getColumnDimension('C')->setWidth(30);
+        $sheet->getColumnDimension('D')->setWidth(30);
+        $sheet->getColumnDimension('E')->setWidth(30);
+        $sheet->getColumnDimension('F')->setWidth(30);
+
+        $sheet->mergeCells('A2:E2'); // merger blok a2 sampe e2
+        $sheet->setCellValue('A2','Daftar Penerbit');
+        $sheet->getStyle('A2:F2')->getFont()->setBold(true); // mengatur fontstyle bold dari yang d merge
+        $sheet->getStyle('A2:F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // mengatur ke tengah text nya
+
+        $sheet->getStyle('A4:F4')->getFont()->setBold(true);
+        $sheet->getStyle('A4:E4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->setCellValue('A4','No');
+        $sheet->setCellValue('B4','nama');
+        $sheet->setCellValue('C4','alamat');
+        $sheet->setCellValue('D4','telepon');
+        $sheet->setCellValue('E4','email');
+
+        $row = 4;
+        $i = 1;
+
+        $models = new Penerbit();
+//       $searchModel = new BukuSearch();
+
+        foreach ($models->find()->all() as $data) {
+            $row++;
+            $sheet->setCellValue('A' . $row, $i);
+            $sheet->getStyle('A' . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+            $sheet->setCellValue('B' . $row, $data->nama);
+            $sheet->setCellValue('C' . $row, $data->alamat);
+            $sheet->setCellValue('D' . $row, $data->telepon);
+            $sheet->setCellValue('E' . $row, $data->email);
+            
+
+            $i++;
+        }
+        $filename = "DataPenerbitBaru - ".date("Y-m-d-H-i-s").".xlsx";
+        $path = 'exports/' . $filename;
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($path);
+
+        return $this->redirect($path);
+    }
 }

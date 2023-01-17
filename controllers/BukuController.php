@@ -256,7 +256,7 @@ class BukuController extends Controller
             $sheet->setCellValue('C' . $row, $data->tahun_terbit);
             $sheet->setCellValue('D' . $row, $data->penulis->nama);
             $sheet->setCellValue('E' . $row, $data->penerbit->nama);
-            $sheet->setCellValue('F' . $row, $data->kategori->nama);
+            $sheet->setCellValue('F' . $row, $data->kategori->kategori);
 
             $i++;
         }
