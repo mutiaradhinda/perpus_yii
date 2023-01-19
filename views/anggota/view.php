@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Penulis $model */
+/** @var app\models\Anggota $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Penulis', 'url' => ['index']];
+// $this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Anggotas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="penulis-view">
+<div class="anggota-view">
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- general form elements -->
             <div class="card card-outline">
               <div class="card-header">
-                <h2 class="card-title">Daftar Penulis</h2>
+                <h2 class="card-title">Daftar Anggota</h2>
               </div>
               <div class="card-body">
 
@@ -33,24 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            [
-                'label' => 'Penerbit',
-                'attribute' => 'nama',
-            ],
-            [
-                'label' => 'Alamat',
-                'attribute' => 'alamat',
-            ],
-            [
-                'label' => 'Telepon',
-                'attribute' => 'telepon',
-            ],
-            
+            'nama',
+            'alamat',
             'email:email',
         ],
     ]) ?>
 
-</div>
 </div>
 </div>
 </div>

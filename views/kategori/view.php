@@ -12,6 +12,17 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="kategori-view">
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-outline">
+              <div class="card-header">
+                <h2 class="card-title">Daftar Kategori</h2>
+              </div>
+              <div class="card-body">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -27,10 +38,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'kategori',
-            
+            [
+                'label' => 'Kategori',
+                'attribute' => 'kategori',
+            ],
         ],
     ]) ?>
 
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 </div>

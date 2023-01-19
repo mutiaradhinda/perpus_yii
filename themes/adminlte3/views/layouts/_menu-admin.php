@@ -26,7 +26,7 @@ use hail812\adminlte\widgets\Menu;
             ['label' => 'Semua', 'iconStyle'=>'far', 'icon' => 'star', 'url' => ['/user/index']],
             ['label' => 'Admin', 'iconStyle'=>'far', 'icon' => 'star', 'url' => ['/user/index-admin']],
             ['label' => 'Petugas', 'iconStyle'=>'far', 'icon' => 'star', 'url' => ['/user/index-petugas']],
-            ['label' => 'Anggota', 'iconStyle'=>'far', 'icon' => 'star', 'url' => ['/user/index-anggota']],
+            ['label' => 'Anggota', 'iconStyle'=>'far', 'icon' => 'star', 'url' => ['anggota/']],
             ['label' => 'User Role', 'icon' => 'users', 'url' => ['/user-role']],
         ]],
         ['label' => 'User Baru', 'icon' => 'user', 'items' => [

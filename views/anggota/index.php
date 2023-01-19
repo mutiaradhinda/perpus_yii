@@ -1,19 +1,18 @@
 <?php
 
-use app\models\Buku;
+use app\models\Anggota;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /** @var yii\web\View $this */
-/** @var app\models\BukuSearch $searchModel */
+/** @var app\models\AnggotaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Buku';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="buku-index">
+<div class="anggota-index">
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -27,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <div class="card-body">
 
     <p>
-        <?= Html::a('Create Buku', ['create'], ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a('Create Anggota', ['create'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Export PDF', ['report'], ['class' => 'btn btn-danger', 'target' => '_blank']) ?>
         <?= Html::a('<i class="fa fa-file-excel"></i> Export Excel', ['exportexcel'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -42,42 +41,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'header' => 'Judul Buku',
+                'header' => 'Nama Penulis',
                 'attribute' => 'nama',
                 'headerOptions' => ['class'=>'text-center'],
             ],
             [
-                'header' => 'Tahun Terbit',
-                'attribute' => 'tahun_terbit',
+                'header' => 'Alamat',
+                'attribute' => 'alamat',
                 'headerOptions' => ['class'=>'text-center'],
             ],
             [
-                'header' => 'Penulis',
-                'attribute' => 'penulis.nama',
+                'header' => 'Email',
+                'attribute' => 'email',
                 'headerOptions' => ['class'=>'text-center'],
             ],
-            [
-                'header' => 'Penerbit',
-                'attribute' => 'penerbit.nama',
-                'headerOptions' => ['class'=>'text-center'],
-            ],
-            [
-                'header' => 'Kategori',
-                'attribute' => 'kategori.kategori',
-                'headerOptions' => ['class'=>'text-center'],
-            ],
-            [
-                'class' => 'yii\grid\DataColumn',
-                'header' => 'Sampul',
-                'format' => 'raw',
-                'value' => function($data){
-                    return "<img width='104px' src='".Url::to(['perpus-yii/view-image','nama'=>$data->image])."'>";
-                }
-            ],
-           
+            
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Buku $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Anggota $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

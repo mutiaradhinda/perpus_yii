@@ -6,35 +6,54 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Penerbit $model */
 
-$this->title = $model->id;
+$this->title = 'Penerbit';
 $this->params['breadcrumbs'][] = ['label' => 'Penerbits', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="penerbit-view">
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-outline">
+              <div class="card-header">
+                <h2 class="card-title">Daftar Penerbit</h2>
+              </div>
+              <div class="card-body">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Kembali', ['index'], ['class' => 'btn btn-success']) ?>
+
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'nama',
-            'alamat',
-            'telepon',
+            [
+                'label' => 'Penerbit',
+                'attribute' => 'nama',
+            ],
+            [
+                'label' => 'Alamat',
+                'attribute' => 'alamat',
+            ],
+            [
+                'label' => 'Telepon',
+                'attribute' => 'telepon',
+            ],
+            
             'email:email',
-            'created_at',
-            'updated_at',
         ],
     ]) ?>
 
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 </div>
